@@ -55,22 +55,44 @@ const SignUp = () => {
                         <h2 className={styles.header}>SignUp</h2>
                         <div className={styles.formField}>
                               <label>Name</label>
-                              <input type='text' name='name' value={name} onChange={inputOnChange} onFocus={setFieldTouched} />
+                              <input
+                                    className={errors.name && touched.name ? styles.uncompleted : styles.formInput}
+                                    type='text'
+                                    name='name'
+                                    value={name}
+                                    onChange={inputOnChange}
+                                    onFocus={setFieldTouched}
+                              />
                               {errors.name && touched.name && <span>{errors.name}</span>}
                         </div>
                         <div className={styles.formField}>
                               <label>Email</label>
-                              <input type='email' name='email' value={email} onChange={inputOnChange} onFocus={setFieldTouched} />
+                              <input
+                                    className={errors.email && touched.email ? styles.uncompleted : styles.formInput}
+                                    type='email'
+                                    name='email'
+                                    value={email}
+                                    onChange={inputOnChange}
+                                    onFocus={setFieldTouched}
+                              />
                               {errors.email && touched.email && <span>{errors.email}</span>}
                         </div>
                         <div className={styles.formField}>
                               <label>Password</label>
-                              <input type='password' name='password' value={password} onChange={inputOnChange} onFocus={setFieldTouched} />
+                              <input
+                                    className={errors.password && touched.password ? styles.uncompleted : styles.formInput}
+                                    type='password'
+                                    email='password'
+                                    value={password}
+                                    onChange={inputOnChange}
+                                    onFocus={setFieldTouched}
+                              />
                               {errors.password && touched.password && <span>{errors.password}</span>}
                         </div>
                         <div className={styles.formField}>
                               <label>Confirm Password</label>
                               <input
+                                    className={errors.confirmPassword && touched.confirmPassword ? styles.uncompleted : styles.formInput}
                                     type='password'
                                     name='confirmPassword'
                                     value={confirmPassword}
@@ -89,8 +111,8 @@ const SignUp = () => {
                                           onChange={inputOnChange}
                                           onFocus={setFieldTouched}
                                     />
-                                    {errors.isAccepted && touched.isAccepted && <span>{errors.isAccepted}</span>}
                               </div>
+                              {errors.isAccepted && touched.isAccepted && <span>{errors.isAccepted}</span>}
                         </div>
                         <div className={styles.buttonsContainer}>
                               <button type='submit'>Sign Up</button>
