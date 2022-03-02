@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styles from './SingUp.module.css';
 import { validate } from './validate';
+import { notify } from './toast';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
       //States
@@ -32,7 +35,10 @@ const SignUp = () => {
       };
       const formOnSubmit = (e) => {
             e.preventDefault();
-            if (Object.keys(errors).length) {
+            if (!Object.keys(errors).length) {
+                  notify('success', 'You signed up successfuly');
+            } else {
+                  notify('error', 'Invalid data!');
                   setTouched({
                         name: true,
                         email: true,
@@ -44,60 +50,53 @@ const SignUp = () => {
       };
 
       return (
-            <div>
-                  <div className={styles.container}>
-                        <form className={styles.formContainer} onSubmit={formOnSubmit}>
-                              <h2 className={styles.header}>SignUp</h2>
-                              <div className={styles.formField}>
-                                    <label>Name</label>
-                                    <input type='text' name='name' value={name} onChange={inputOnChange} onFocus={setFieldTouched} />
-                                    {errors.name && touched.name && <span>{errors.name}</span>}
-                              </div>
-                              <div className={styles.formField}>
-                                    <label>Email</label>
-                                    <input type='email' name='email' value={email} onChange={inputOnChange} onFocus={setFieldTouched} />
-                                    {errors.email && touched.email && <span>{errors.email}</span>}
-                              </div>
-                              <div className={styles.formField}>
-                                    <label>Password</label>
+            <div className={styles.container}>
+                  <form className={styles.formContainer} onSubmit={formOnSubmit}>
+                        <h2 className={styles.header}>SignUp</h2>
+                        <div className={styles.formField}>
+                              <label>Name</label>
+                              <input type='text' name='name' value={name} onChange={inputOnChange} onFocus={setFieldTouched} />
+                              {errors.name && touched.name && <span>{errors.name}</span>}
+                        </div>
+                        <div className={styles.formField}>
+                              <label>Email</label>
+                              <input type='email' name='email' value={email} onChange={inputOnChange} onFocus={setFieldTouched} />
+                              {errors.email && touched.email && <span>{errors.email}</span>}
+                        </div>
+                        <div className={styles.formField}>
+                              <label>Password</label>
+                              <input type='password' name='password' value={password} onChange={inputOnChange} onFocus={setFieldTouched} />
+                              {errors.password && touched.password && <span>{errors.password}</span>}
+                        </div>
+                        <div className={styles.formField}>
+                              <label>Confirm Password</label>
+                              <input
+                                    type='password'
+                                    name='confirmPassword'
+                                    value={confirmPassword}
+                                    onChange={inputOnChange}
+                                    onFocus={setFieldTouched}
+                              />
+                              {errors.confirmPassword && touched.confirmPassword && <span>{errors.confirmPassword}</span>}
+                        </div>
+                        <div className={styles.formField}>
+                              <div className={styles.checkboxContainer}>
+                                    <label>I accept terms of privacy policy</label>
                                     <input
-                                          type='password'
-                                          name='password'
-                                          value={password}
+                                          type='checkbox'
+                                          name='isAccepted'
+                                          value={isAccepted}
                                           onChange={inputOnChange}
                                           onFocus={setFieldTouched}
                                     />
-                                    {errors.password && touched.password && <span>{errors.password}</span>}
+                                    {errors.isAccepted && touched.isAccepted && <span>{errors.isAccepted}</span>}
                               </div>
-                              <div className={styles.formField}>
-                                    <label>Confirm Password</label>
-                                    <input
-                                          type='password'
-                                          name='confirmPassword'
-                                          value={confirmPassword}
-                                          onChange={inputOnChange}
-                                          onFocus={setFieldTouched}
-                                    />
-                                    {errors.confirmPassword && touched.confirmPassword && <span>{errors.confirmPassword}</span>}
-                              </div>
-                              <div className={styles.formField}>
-                                    <div className={styles.checkboxContainer}>
-                                          <label>I accept terms of privacy policy</label>
-                                          <input
-                                                type='checkbox'
-                                                name='isAccepted'
-                                                value={isAccepted}
-                                                onChange={inputOnChange}
-                                                onFocus={setFieldTouched}
-                                          />
-                                          {errors.isAccepted && touched.isAccepted && <span>{errors.isAccepted}</span>}
-                                    </div>
-                              </div>
-                              <div className={styles.buttonsContainer}>
-                                    <button type='submit'>Sign Up</button>
-                              </div>
-                        </form>
-                  </div>
+                        </div>
+                        <div className={styles.buttonsContainer}>
+                              <button type='submit'>Sign Up</button>
+                        </div>
+                  </form>
+                  <ToastContainer />
             </div>
       );
 };

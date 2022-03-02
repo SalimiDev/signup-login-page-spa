@@ -26,7 +26,7 @@ export const validate = (inputData) => {
      if (!confirmPassword) {
           errors.confirmPassword = 'Please confirm the Password';
      } else if (confirmPassword !== password) {
-          errors.confirmPassword = 'Those passwords didn’t match. Try again.';
+          errors.confirmPassword = 'The passwords didn’t match. Try again.';
      }
 
      if (isAccepted) {
