@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './SingUp.module.css';
+import { validate } from './validate';
 
 const SignUp = () => {
      const [inputData, setInputData] = useState({
@@ -9,6 +10,10 @@ const SignUp = () => {
           confirmPassword: '',
           isAccepted: false,
      });
+     const [errors, setErrors] = useState({});
+     useEffect(() => {
+          setErrors(validate(inputData));
+     }, [inputData]);
      // Destructure object
      const { name, email, password, confirmPassword, isAccepted } = inputData;
 
@@ -30,7 +35,7 @@ const SignUp = () => {
                          </div>
                          <div className={styles.formField}>
                               <label>Email</label>
-                              <input type='email' name='email' value={email} />
+                              <input type='email' name='email' value={email} onChange={inputOnChange} />
                          </div>
                          <div className={styles.formField}>
                               <label>Password</label>
