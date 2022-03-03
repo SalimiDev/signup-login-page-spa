@@ -4,6 +4,7 @@ import { validate } from './validate';
 import { notify } from './toast';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
       //States
@@ -23,8 +24,7 @@ const SignUp = () => {
       const setFieldTouched = (e) => {
             setTouched({ ...touched, [e.target.name]: true });
       };
-      // Destructure object
-      const { name, email, password, confirmPassword, isAccepted } = inputData;
+
       //Handle inputs updating
       const inputOnChange = (e) => {
             if (e.target.name === 'isAccepted') {
@@ -48,7 +48,8 @@ const SignUp = () => {
                   });
             }
       };
-
+      // Destructure object
+      const { name, email, password, confirmPassword, isAccepted } = inputData;
       return (
             <div className={styles.container}>
                   <form className={styles.formContainer} onSubmit={formOnSubmit}>
@@ -115,6 +116,7 @@ const SignUp = () => {
                               {errors.isAccepted && touched.isAccepted && <span>{errors.isAccepted}</span>}
                         </div>
                         <div className={styles.buttonsContainer}>
+                              <Link to={'/Login'}>Login</Link>
                               <button type='submit'>Sign Up</button>
                         </div>
                   </form>
