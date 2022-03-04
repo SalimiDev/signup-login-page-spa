@@ -9,8 +9,8 @@ import { Link } from 'react-router-dom';
 const Login = () => {
       //States
       const [inputData, setInputData] = useState({
-            name: '',
             email: '',
+            password: '',
       });
       const [touched, setTouched] = useState({});
       const [errors, setErrors] = useState({});
@@ -67,7 +67,6 @@ const Login = () => {
                               />
                               {errors.password && touched.password && <span>{errors.password}</span>}
                         </div>
-
                         <div className={styles.buttonsContainer}>
                               <Link to={'/signup'}>Sign up</Link>
                               <button type='submit'>Login </button>

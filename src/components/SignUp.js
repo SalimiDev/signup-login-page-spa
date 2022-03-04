@@ -19,7 +19,7 @@ const SignUp = () => {
       const [touched, setTouched] = useState({});
       //Get inputs errors from validate component
       useEffect(() => {
-            setErrors(validate(inputData));
+            setErrors(validate(inputData, 'Signup'));
       }, [inputData, touched]);
       const setFieldTouched = (e) => {
             setTouched({ ...touched, [e.target.name]: true });
@@ -50,6 +50,7 @@ const SignUp = () => {
       };
       // Destructure object
       const { name, email, password, confirmPassword, isAccepted } = inputData;
+      
       return (
             <div className={styles.container}>
                   <form className={styles.formContainer} onSubmit={formOnSubmit}>
@@ -83,7 +84,7 @@ const SignUp = () => {
                               <input
                                     className={errors.password && touched.password ? styles.uncompleted : styles.formInput}
                                     type='password'
-                                    email='password'
+                                    name='password'
                                     value={password}
                                     onChange={inputOnChange}
                                     onFocus={setFieldTouched}
